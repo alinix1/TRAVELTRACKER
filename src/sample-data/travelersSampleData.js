@@ -1,6 +1,6 @@
 // 7 travelers 
 
-const travelersSampleData = [
+export const travelersSampleData = [
     {
     "id": 1,
     "name": "Ham Leadbeater",
@@ -36,5 +36,6 @@ const travelersSampleData = [
     "travelType": "relaxer"
   }
 ];
+
+export default travelersSampleData;
   
-  export default travelersSampleData;
