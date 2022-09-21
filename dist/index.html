@@ -4,13 +4,96 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>YOLO Travels</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <div class="navbar">
+    <h1 class="logo">YOLO Travels</h1>
+    <p class="caption" id="caption">"Travel is my therapy."
+      <br>"Forget champagne and caviar - Taste the world instead!"
+    </p>
+    <section class="navbar-buttons-section" id="navBarSection">
+      <button class="navbar-buttons hidden" id="navBarTripsBtn">T R I P S</button>
+      <button class="navbar-buttons hidden" id="navBarTripsPlannerBtn">P L A N N E R</button>
+      <button class="navbar-buttons hidden" id="navBarSignOutBtn">S I G N O U T</button>
+    </section>
+  </div>
+  <main>
+    <div id="loginPg">
+      <h2>Exciting Travels Await...</h2>
+      <h2 class="hidden" id="currentTrips">Current Trips</h2>
+      <div class="current-page" id="currentPage">
+        <article class="card">
+          <article class="photo-container">
+            <img src='./images/flying.png' alt="Airplane window" class="destination-photo">
+          </article>
+          <article class="destination-info-container">
+            <p class="date-time" id="enterDate">Please enter your details:</p>
+          </article>
+        </article>
+        <article class="card login-form">
+          <form id="loginForm">
+            <label for="loginFormUsername">Username:</label><br>
+            <input type="text" id="loginFormUsername" name="username"><br><br>
+            <label for="loginFormPassword">Password:</label><br>
+            <input type="text" class="loginFormPassword" name="password"><br><br>
+            <button type="button" class="submit-btn" id="loginFormSubmitBtn">Time to Travel</button>
+          </form>
+        </article>
+      </div>
+    </div>
+    <div class="dashboard hidden" id="tripsDashboard"></div>
+  <div id='currentPage'>
+    <article class="card">
+      <article class="photo-container">
+        <img src='./images/flying.png' alt="Airplane window" class="destination-photo">
+      </article>
+    <article class="destination-info-container">
+      <h3 class="name-of-destination">You only live once! Live it up</h3>
+      <p class="date-time" id="yearCost"></p>
+    </article>
+    </article>
+  </div>
+  <h2 class="hidden" id="currentTrips">Current Trips</h2>
+  <div id="currentPage"></div>
+  <h2 class="hidden" id="pendingTrips">Pending Trips</h2>
+  <div id="currentPage"></div>
+  <h2 class="hidden" id="futureTrips">Future Trips</h2>
+  <div id="currentPage"></div>
+  <h2 class="hidden" id="pastTrips">Past Trips</h2>
+  <div id="currentPage"></div>
+  <div id="letsGo" class="hidden">
+    <h2>Let's Go YOLO 🌴</h2>
+    <h2 class="hidden" id="currentTrips">Current Trips</h2>
+    <div id="currentPage">
+      <article class="card">
+        <article class="photo-container">
+          <img src="./images/flying.png" alt="Airplane window" class="destination-photo">
+        </article>
+          <article class="destination-info-container">
+            <h3 class="name-of-destination" id="estimatedCost">Estimated Cost:</h3>
+            <p class="date-time" id="estimatedCost">Please Enter You Info</p>
+            <button class="lets-go-btn hidden submit-btn" id="letsGoBtn">Let's Go YOLO</button>
+          </article>
+          <article class="card">
+            <article class="photo-info-container">
+              <form id="plannerFormReset">
+                <label for="date">Trip Date:</label><br>
+                <input type="date" data-date-inline-picker="true" id="travelFormDate" min=""><br><br>
+                <label for="days">Number of Days:</label><br>
+                <input type="number" min="1" id="travelFormDuration"><br><br>
+                <label for="travelers">Number of travelers:</label><br>
+                <input type="number" min="1" id="travelFormTravelers"><br><br>
+                <select for="destination" id="travelFormDestination" class="dropdown">
+                </select><br><br><br>
+                <button type="button" id="travelFormSubmissionBtn" class="submit-btn">What's the cost?</button>
+              </form>
+            </article>
+          </article>
+        </article>
+    </div>
+  </div>
+  </main>
   <script src="bundle.js"></script>
-
 </body>
 </html>
