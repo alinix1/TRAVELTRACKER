@@ -43,8 +43,8 @@ describe('Trips', () => {
 
   });
 
-  it.skip('should calculate and return total cost of trips annually', () => {
-    expect(trips.totalCostAnnualTrip()).to.equal()
+  it('should calculate and return total cost of trips annually', () => {
+    expect(trips.totalCostAnnualTrip(tripsSampleData, destinations)).to.equal('10401')
 
   });
 
@@ -59,7 +59,7 @@ describe('Trips', () => {
   });
 
   it.skip('should be able to return a traveler\'s current trips', () => {
-    expect(trips.getAllTripsTime(9, 'current')).to.deep.equal([tripsSampleData[0], tripsSampleData[1]]);
+    expect(trips.getAllCurrentTrips(9, 'current')).to.deep.equal([tripsSampleData[0], tripsSampleData[1]]);
 
   });
 
