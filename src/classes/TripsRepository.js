@@ -1,10 +1,9 @@
-import  dayjs from 'dayjs'
+import  dayjs, { Dayjs, isDayjs } from 'dayjs'
 dayjs().format();
 
 class TripsRepository {
     constructor(trips) {
         this.trips = trips;
-        this.annualTrips = []
     }
 
     getTripsById(ID) {
@@ -14,7 +13,10 @@ class TripsRepository {
     getAllCurrentTrips(ID, time) {
         const travelerTrips = this.getTripsById(ID);
          if (time === 'current') {
-         return travelerTrips.filter(trip => dayjs(trip.date).$d === dayjs(trip.date).$d);
+            console.log('10000', travelerTrips)
+            return travelerTrips.filter(trip => dayjs() > dayjs(trip.date));
+        } else {
+            return travelerTrips.filter(trip => dayjs() < dayjs(trip.date));
         }
     }
         // current trips is not working 
@@ -33,10 +35,17 @@ class TripsRepository {
         }
      }
 
+     getAllPendingTrips(ID, status) {
+        const travelerTrips = this.getTripsById(ID)
+        return travelerTrips.filter(trip => trip.status === 'pending')
+     }
+
+    // need pending trips
+
     totalCostSingleTrip(trip, destination) {
        const tripCost = (trip.duration * destination.estimatedLodgingCostPerDay) + (trip.travelers * destination.estimatedFlightCostPerPerson);
-       const agentFee = 1.1
-       let total = tripCost * agentFee
+       const agentFee = 1.1;
+       let total = tripCost * agentFee;
         return total.toFixed(0);
     }
 
@@ -53,9 +62,9 @@ class TripsRepository {
                             acc += ((currentTrip.duration * destination.estimatedLodgingCostPerDay) + (currentTrip.travelers * destination.estimatedFlightCostPerPerson));
                         }
                     })
-                    return acc
+                    return acc;
                 }, 0)
-                return (totalCost * 1.1).toFixed(0)
+                return (totalCost * 1.1).toFixed(0);
             }
 
     }
