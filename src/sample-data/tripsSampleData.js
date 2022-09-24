@@ -7,7 +7,7 @@ const tripsSampleData = [
       "userID": 1,
       "destinationID": 3,
       "travelers": 1,
-      "date": "2022/09/16",
+      "date": "2022/09/23",
       "duration": 8,
       "status": "approved",
       "suggestedActivities": []
@@ -17,7 +17,7 @@ const tripsSampleData = [
       "userID": 1,
       "destinationID": 2,
       "travelers": 2,
-      "date": "2020/09/16",
+      "date": "2022/09/23",
       "duration": 6,
       "status": "approved",
       "suggestedActivities": []
@@ -67,7 +67,7 @@ const tripsSampleData = [
       "userID": 3,
       "destinationID": 7,
       "travelers": 1,
-      "date": "2022/09/16",
+      "date": "2022/11/16",
       "duration": 8,
       "status": "approved",
       "suggestedActivities": []
@@ -77,7 +77,7 @@ const tripsSampleData = [
       "userID": 3,
       "destinationID": 8,
       "travelers": 1,
-      "date": "2020/09/16",
+      "date": "20222/10/16",
       "duration": 8,
       "status": "approved",
       "suggestedActivities": []
@@ -87,7 +87,7 @@ const tripsSampleData = [
       "userID": 3,
       "destinationID": 9,
       "travelers": 1,
-      "date": "2022/07/08",
+      "date": "2022/12/08",
       "duration": 7,
       "status": "approved",
       "suggestedActivities": []

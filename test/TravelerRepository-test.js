@@ -1,8 +1,7 @@
 import { expect } from 'chai';
-import TravelerRepository from '../src/classes/TravelerRepository';
-import Traveler from '../src/classes/Traveler';
+import TravelerRepository from '../src/classes/TravelerRepository.js';
+import Traveler from '../src/classes/Traveler.js';
 import  { travelersSampleData }  from '../src/sample-data/travelersSampleData';
-// remember 'sad paths' for methods
 
 describe('Traveler Repository', () => {
     let travelerRepository, traveler1, traveler2, traveler3;
@@ -23,7 +22,7 @@ describe('Traveler Repository', () => {
         expect(travelerRepository).to.be.an.instanceof(TravelerRepository);
     });
 
-    it('should hold traveler data in an array', () => {
+    it('should hold traveler info in an array', () => {
         expect(travelerRepository.travelers).to.deep.equal(travelersSampleData);
     });
 
