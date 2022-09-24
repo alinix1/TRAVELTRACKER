@@ -1,7 +1,6 @@
 import { expect } from 'chai';
-import Traveler from '../src/classes/Traveler';
-import { travelersSampleData } from '../src/sample-data/travelersSampleData'
-// remember 'sad paths' for properties and methods
+import Traveler from '../src/classes/Traveler.js';
+import travelersSampleData from '../src/sample-data/travelersSampleData.js';
 
 describe('Traveler', () => {
     let traveler1, traveler2, traveler3;
@@ -33,9 +32,9 @@ describe('Traveler', () => {
     });
 
     it('should be the correct id', () => {
-        expect(traveler1.id).to.not.equal(2)
-        expect(traveler2.id).to.not.equal(13)
-        expect(traveler3.id).to.not.equal(1)
+        expect(traveler1.id).to.not.equal(2);
+        expect(traveler2.id).to.not.equal(13);
+        expect(traveler3.id).to.not.equal(1);
     });
 
     it('should have a name', () => {
@@ -70,10 +69,16 @@ describe('Traveler', () => {
         expect(traveler3.travelerType).to.not.equal("photographer");
     });
 
-    it('should be able to return a traveler\'s first name', () => {
+    it('should return a traveler\'s first name', () => {
         expect(traveler1.returnFirstName()).to.equal('Ham');
         expect(traveler2.returnFirstName()).to.equal('Rachael');
         expect(traveler3.returnFirstName()).to.equal('Sibby');
     });
 
-})
+    it('should return the correct traveler\'s first name', () => {
+        expect(traveler1.returnFirstName()).to.not.equal('Sibby');
+        expect(traveler2.returnFirstName()).to.not.equal('Rachael Vaughten');
+        expect(traveler3.returnFirstName()).to.not.equal('');
+    });
+
+});

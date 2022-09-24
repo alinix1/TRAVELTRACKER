@@ -1,9 +1,9 @@
 class TravelerRepository {
     constructor(travelData) {
-        this.travelers = travelData || [];
+        this.travelers = travelData;
     }
     getTravelerInfoById(ID) {
-        return this.travelers.find(traveler => traveler.id === ID)
+        return this.travelers.find(traveler => traveler.id === ID);
     }
 }
 
