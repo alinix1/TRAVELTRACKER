@@ -58,8 +58,13 @@ describe('Trips', () => {
 
   });
 
+  it.skip('should be able to return a traveler\'s trip status', () => {
+    expect(trips.getAllPendingTrips()).to.equal('pending');
+    expect(trips.getAllPendingTrips()).to.equal('approved');
+  })
+
   it.skip('should be able to return a traveler\'s current trips', () => {
-    expect(trips.getAllCurrentTrips(9, 'current')).to.deep.equal([tripsSampleData[0], tripsSampleData[1]]);
+    expect(trips.getAllCurrentTrips(1, 'current')).to.deep.equal([tripsSampleData[2], tripsSampleData[0]]);
 
   });
 
