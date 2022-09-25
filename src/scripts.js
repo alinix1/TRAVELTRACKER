@@ -2,7 +2,8 @@
 // ---------------------------------------------------
 import dayjs from 'dayjs';
 import './css/styles.css';
-import './images/flying.png';
+import './images/airplane-window.png';
+import './images/flying-money.png';
 import Traveler from '../src/classes/Traveler.js';
 import TravelerRepository from '../src/classes/TravelerRepository.js';
 import TripsRepository from '../src/classes/TripsRepository.js';
@@ -23,10 +24,9 @@ let singleTraveler;
 Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getDestinationsData()])
   .then((data) => {
     const allTravelersData = data.reduce((acc, currentItem) => {
-        console.log('100', acc)
       return acc = {...acc, ...currentItem}
     }, {})
-    instantiateData(allTravelersData)
+    instantiateData(allTravelersData);
   })
 
   // POST API DATA //
@@ -35,6 +35,12 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
 
   // QUERY SELECTORS //
 // ---------------------------------------------------
+var errorMessage = document.getElementById(errorMessage);
+var welcomeTraveler = document.getElementById(welcomeTraveler);
+var todaysDateInfo = document.getElementById(todaysDateInfo);
+var main = document.querySelector('.main');
+var loginForm = document.querySelector('.login-form');
+
 
 
   // EVENT LISTENERS // 
@@ -46,10 +52,10 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
 
   function instantiateData(data) {
     travelers = data.travelers.map(traveler => new Traveler(traveler));
-    travelerRepository = new TravelerRepository(travelers)
-    singleTraveler = new Traveler(travelers[getRandomId()])
-    tripsRepository = new TripsRepository(data.trips)
-    destinationsRepository = new DestinationsRepository(data.destinations)
+    travelerRepository = new TravelerRepository(travelers);
+    singleTraveler = new Traveler(travelers[getRandomId()]);
+    tripsRepository = new TripsRepository(data.trips);
+    destinationsRepository = new DestinationsRepository(data.destinations);
   }
   
 

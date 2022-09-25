@@ -1,99 +1,120 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YOLO Travels</title>
+  <title><i>YOLO Travels</i></title>
 </head>
 <body>
-  <div class="navbar">
-    <h1 class="logo">YOLO Travels</h1>
+  <nav>
+    <h1>YOLO Travels</h1>
     <p class="caption" id="caption">"Travel is my therapy."
       <br>"Forget champagne and caviar - Taste the world instead!"
     </p>
-    <section class="navbar-buttons-section" id="navBarSection">
-      <button class="navbar-buttons hidden" id="navBarTripsBtn">T R I P S</button>
-      <button class="navbar-buttons hidden" id="navBarTripsPlannerBtn">P L A N N E R</button>
-      <button class="navbar-buttons hidden" id="navBarSignOutBtn">S I G N O U T</button>
-    </section>
-  </div>
-  <main>
-    <div id="loginPg">
-      <h2>Exciting Travels Await...</h2>
-      <h2 class="hidden" id="currentTrips">Current Trips</h2>
-      <div class="current-page" id="currentPage">
-        <article class="card">
-          <article class="photo-container">
-            <img src='./images/flying.png' alt="Airplane window" class="destination-photo">
-          </article>
-          <article class="destination-info-container">
-            <p class="date-time" id="enterDate">Please enter your details:</p>
-          </article>
-        </article>
-        <article class="card login-form">
-          <form id="loginForm">
-            <label for="loginFormUsername">Username:</label><br>
-            <input type="text" id="loginFormUsername" name="username"><br><br>
-            <label for="loginFormPassword">Password:</label><br>
-            <input type="text" class="loginFormPassword" name="password"><br><br>
-            <button type="button" class="submit-btn" id="loginFormSubmitBtn">Time to Travel</button>
-          </form>
-        </article>
+    <div class="welcome-traveler">
+      <h2 id="welcomeTraveler"></h2>
+      <h3 id="todaysDateInfo"></h3>
+    </div>
+  </nav>
+  <p class="error-message" id="errorMessage"></p>
+  <img class="airplane-window" src="./images/airplane-window.png" alt="airplane window">
+  <form class="login-form">
+    <label for="username-input" class="main-form">username:</label>
+    <input type="text" class="username-input login-page-input user-input main-form" name="username-input" placeholder="username" id="username-input" required>
+    <label for="password-input" class="main-form">password:</label>
+    <input type="password" class="password-input login-page-input user-input main-form" name="password-input" placeholder="password" id="password-input" required>
+    <input type="submit" class="login-page-input user-input main-form" id="loginButton" value="login">
+  </form>
+  <main class="hidden">
+    <div class="plan-trip-card main-card">
+      <h2 class="plan-header card-header">Please Enter Your Info👇</h2>
+      <form class="plan-trip-form">
+        <label class="main-form" for="destination-datalist">destinations</label>
+        <input placeholder="select from menu or type" class="main-form user-input" type="text" list="destinations" id="destination-datalist" name="destination-datalist" required>
+        <datalist id="destinations">
+          <option value="Lima, Peru"></option>
+          <option value="Stockholm, Sweden"></option>
+          <option value="Sydney, Austrailia"></option>
+          <option value="Cartagena, Colombia"></option>
+          <option value="Madrid, Spain"></option>
+          <option value="Jakarta, Indonesia"></option>
+          <option value="Paris, France"></option>
+          <option value="Tokyo, Japan"></option>
+          <option value="Amsterdam, Netherlands"></option>
+          <option value="Toronto, Canada"></option>
+          <option value="Mikonos, Greece"></option>
+          <option value="Wellington, New Zealand"></option>
+          <option value="St. Petersburg, Russia"></option>
+          <option value="Marrakesh, Morocco"></option>
+          <option value="Manila, Philippines"></option>
+          <option value="Bangkok, Thailand"></option>
+          <option value="Jaipur, India"></option>
+          <option value="Cape Town, South Africa"></option>
+          <option value="Quito, Ecuador"></option>
+          <option value="Miami, Florida"></option>
+          <option value="Tulum, Mexico"></option>
+          <option value="Rome, Italy"></option>
+          <option value="Copenhagen, Denmark"></option>
+          <option value="Vilnius, Lithuania"></option>
+          <option value="New York, New York"></option>
+          <option value="London, England"></option>
+          <option value="San Francisco, California"></option>
+          <option value="San Juan, Puerto Rico"></option>
+          <option value="Willemstad, Curaçao"></option>
+          <option value="Antananarivo, Madagascar"></option>
+          <option value="Colombo, Sri Lanka"></option>
+          <option value="Kathmandu, Nepal"></option>
+          <option value="Brussels, Belgium"></option>
+          <option value="Seoul, South Korea"></option>
+          <option value="Anchorage, Alaska"></option>
+          <option value="Reykjavík, Iceland"></option>
+          <option value="Frankfurt, Germany"></option>
+          <option value="Helsinki, Finland"></option>
+          <option value="Porto, Portugal"></option>
+          <option value="La Isla Tortuga, Costa Rica"></option>
+          <option value="Montego Bay, Jamaica"></option>
+          <option value="Santo Domingo, Dominican Republic"></option>
+          <option value="Nassau, The Bahamas"></option>
+          <option value="Caye Caulker, Belize"></option>
+          <option value="Calgary, Canada"></option>
+          <option value="Victoria, Seychelles"></option>
+          <option value="Zürich, Switzerland"></option>
+          <option value="Dar es Salaam, Tanzania"></option>
+          <option value="Castries, St Lucia"></option>
+          <option value="Hobart, Tasmania"></option>
+        </datalist> 
+        <label class="main-form" for="duration-trip-info">duration of trip (days)</label>
+        <input placeholder="min 1 day" class="main-form user-input" id="duration-trip-info" name="duration-trip-info" type="number" step="1" min="1" required>
+        <label class="main-form" for="number-travelers-info">number of travelers?</label>
+        <input placeholder="min 1 person" class="main-form user-input" id="number-travelers-info" id="number-travelers-info" name="number-travelers-info" type="number" step="1" min="1" required>
+        <label class="main-form" for="departure-info">departure date</label>
+        <input type="date" data-date-inline-picker="true" id="travelFormDate" min="" required>
+      </form>
+      <div class="trip-cost">
+        <h3 class="total-cost-header">What's the Cost?</h3><img src="./images/flying-money.png" alt="flying money">
+        <div class="total-cost-box">
+          <p class="total-cost-amount"></p>
+        </div>
+          <p class="takeNotice">*prices include a 10% travel agent fee</p>
       </div>
-    </div>
-    <div class="dashboard hidden" id="tripsDashboard"></div>
-  <div id='currentPage'>
-    <article class="card">
-      <article class="photo-container">
-        <img src='./images/flying.png' alt="Airplane window" class="destination-photo">
-      </article>
-    <article class="destination-info-container">
-      <h3 class="name-of-destination">You only live once! Live it up</h3>
-      <p class="date-time" id="yearCost"></p>
-    </article>
-    </article>
-  </div>
-  <h2 class="hidden" id="currentTrips">Current Trips</h2>
-  <div id="currentPage"></div>
-  <h2 class="hidden" id="pendingTrips">Pending Trips</h2>
-  <div id="currentPage"></div>
-  <h2 class="hidden" id="futureTrips">Future Trips</h2>
-  <div id="currentPage"></div>
-  <h2 class="hidden" id="pastTrips">Past Trips</h2>
-  <div id="currentPage"></div>
-  <div id="letsGo" class="hidden">
-    <h2>Let's Go YOLO 🌴</h2>
-    <h2 class="hidden" id="currentTrips">Current Trips</h2>
-    <div id="currentPage">
-      <article class="card">
-        <article class="photo-container">
-          <img src="./images/flying.png" alt="Airplane window" class="destination-photo">
-        </article>
-          <article class="destination-info-container">
-            <h3 class="name-of-destination" id="estimatedCost">Estimated Cost:</h3>
-            <p class="date-time" id="estimatedCost">Please Enter You Info</p>
-            <button class="lets-go-btn hidden submit-btn" id="letsGoBtn">Let's Go YOLO</button>
-          </article>
-          <article class="card">
-            <article class="photo-info-container">
-              <form id="plannerFormReset">
-                <label for="date">Trip Date:</label><br>
-                <input type="date" data-date-inline-picker="true" id="travelFormDate" min=""><br><br>
-                <label for="days">Number of Days:</label><br>
-                <input type="number" min="1" id="travelFormDuration"><br><br>
-                <label for="travelers">Number of travelers:</label><br>
-                <input type="number" min="1" id="travelFormTravelers"><br><br>
-                <select for="destination" id="travelFormDestination" class="dropdown">
-                </select><br><br><br>
-                <button type="button" id="travelFormSubmissionBtn" class="submit-btn">What's the cost?</button>
-              </form>
-            </article>
-          </article>
-        </article>
-    </div>
-  </div>
+      <div class="traveler-trips-card main-card">
+        <h2 class="traveler-trips-header card-header"></h2>
+          <div class="trips-container">
+            <h3 class="trips-header">F U T U R E</h3>
+            <div class="upcoming-trips trips-info">
+            </div>
+          </div>
+          <div class="trips-container">
+            <h3 class="trips-header">P A S T</h3>
+            <div class="past-trips trips-info">
+            </div>
+          </div>
+        </div>
   </main>
   <script src="bundle.js"></script>
 </body>
 </html>
+  

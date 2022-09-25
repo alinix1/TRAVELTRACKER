@@ -1,3 +1,198 @@
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background-color: #EA685D;
+  background-size: cover;
+  font-family: 'Josefin Sans', sans-serif;
+  color: black;
 }
+
+nav,
+.trip-info-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 5rem;
+  color: white;
+  font-weight: normal;
+  margin: 5%;
+}
+
+main {
+  display: flex;
+  justify-content: space-evenly;
+	align-items: center;
+}
+
+/* .hidden {
+  display :none;
+} */
+
+form,
+.plan-trip-card,
+.trip-cost,
+.traveler-trips-card,
+.trips-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+	align-items: center;
+}
+
+.login-form {
+  padding: 200px;
+}
+
+.main-card {
+  background-color: rgba(213, 400, 350, 0.6);
+  border-radius: 5px;
+  height: 300%;
+  margin: 20%;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-card,
+.trip-card {
+  box-shadow: 0px 0px 10px 1px rgba(109, 25, 74 / 29%);
+}
+
+.plan-trip-card {
+  height: 100%;
+  width: 50%;
+}
+
+.card-header {
+  font-size: 1.2rem;
+  margin: 10px;
+}
+
+.main-form,
+.trips-header {
+  margin: 3px;
+}
+
+.user-input {
+  width: 15rem;
+  border-radius: 5px;
+  height: 1.5rem;
+  border: none;
+}
+
+.total-cost-header,
+.takeNotice,
+.total-cost-box,
+.total-cost-for-year,
+.user-input  {
+  text-align: center;
+}
+
+.total-cost-box {
+  background-color: #5C92FA;
+  color: #F3DEC8;
+  height: 45px;
+}
+
+.total-cost-amount {
+  font-size: 25px;
+  margin: 10px;
+}
+
+.total-cost-box,
+#submitTripButton,
+#loginButton {
+  width: 175px;
+  border-radius: 5px;
+}
+
+#submitTripButton,
+#loginButton {
+  background-color: #5C92FA;
+  font-family: 'Anaheim', sans-serif;
+  border: none;
+  margin-top: 8px;
+  height: 25px;
+}
+
+#submitTripButton:hover {
+  background-color: #13626c;
+  cursor: pointer;
+}
+
+#loginButton:hover {
+  background-color: #5e2f80;
+  cursor: pointer;
+}
+
+.takeNotice {
+  font-style:italic;
+  font-weight: light;
+}
+
+.traveler-trips-card {
+  width: 150%;
+}
+
+.trips-container {
+  height: 300px;
+}
+
+.trips-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5px;
+}
+
+.trip-card {
+  background-color: #E1FCFF;
+  width: 200px;
+  height: 110px;
+  margin: 5px;
+  margin-top: 2px;
+}
+
+.trip-photo,
+.trip-info-text,
+.trip-card {
+  border-radius: 5px;
+}
+
+.trip-photo,
+.trip-info-text {
+  height: 60px;
+  margin: 5px;
+}
+
+.trip-status,
+.trip-destination-text,
+.trip-date-text,
+.trip-people-text,
+.trip-info-container {
+  margin: 2px;
+}
+
+.trip-destination-text {
+  font-size: 15px;
+}
+
+.trip-date-text,
+.trip-people-text {
+  font-size: 12px;
+}
+
+.trip-status {
+  padding: 8px;
+}
+
+.airplane-window {
+  height: 25%;
+  width: 30%;
+  border-radius: 0.5rem;
+}
+
+.caption {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
