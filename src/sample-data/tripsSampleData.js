@@ -49,7 +49,7 @@ const tripsSampleData = [
       "travelers": 1,
       "date": "2020/09/16",
       "duration": 8,
-      "status": "approved",
+      "status": "pending",
       "suggestedActivities": []
     },
     {

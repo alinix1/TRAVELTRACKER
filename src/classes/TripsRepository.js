@@ -1,4 +1,4 @@
-import  dayjs, { Dayjs, isDayjs } from 'dayjs'
+import  dayjs from 'dayjs'
 dayjs().format();
 
 class TripsRepository {
@@ -8,18 +8,7 @@ class TripsRepository {
 
     getTripsById(ID) {
         return this.trips.filter(trip => trip.userID === ID);
-    }
-
-    getAllCurrentTrips(ID, time) {
-        const travelerTrips = this.getTripsById(ID);
-         if (time === 'current') {
-            console.log('10000', travelerTrips)
-            return travelerTrips.filter(trip => dayjs() > dayjs(trip.date));
-        } else {
-            return travelerTrips.filter(trip => dayjs() < dayjs(trip.date));
-        }
-    }
-        // current trips is not working 
+    }    
     
     getAllPastTrips(ID, time) {
         const travelerTrips = this.getTripsById(ID);
@@ -35,12 +24,11 @@ class TripsRepository {
         }
      }
 
-     getAllPendingTrips(ID, status) {
+     getAllPendingTrips(ID) {
         const travelerTrips = this.getTripsById(ID)
-        return travelerTrips.filter(trip => trip.status === 'pending')
+        const result = travelerTrips.filter(trip => trip.status === 'pending')
+        return result
      }
-
-    // need pending trips
 
     totalCostSingleTrip(trip, destination) {
        const tripCost = (trip.duration * destination.estimatedLodgingCostPerDay) + (trip.travelers * destination.estimatedFlightCostPerPerson);
@@ -49,24 +37,17 @@ class TripsRepository {
         return total.toFixed(0);
     }
 
-
-    totalCostAnnualTrip(travelerTrips, allDestinations) {
-        let destination;
-        let tripsYear = travelerTrips.filter(trip => trip.date.includes('2022'))
+    totalCostAnnualTrip(travelerTrips, destinationRepository, ID) {
+        let tripsYear = travelerTrips.filter(trip => trip.date.includes('2022') && trip.userID === ID)
         if (tripsYear.length > 0) {
-                let totalCost = tripsYear.reduce((acc, currentTrip) => {
-                    allDestinations.destinations.forEach(destination => {
-                        if (destination.id === currentTrip.destinationID){
-                            destination = allDestinations.getDestinationById(currentTrip.destinationID)
-
-                            acc += ((currentTrip.duration * destination.estimatedLodgingCostPerDay) + (currentTrip.travelers * destination.estimatedFlightCostPerPerson));
-                        }
-                    })
-                    return acc;
-                }, 0)
-                return (totalCost * 1.1).toFixed(0);
-            }
-
+            let totalCost = tripsYear.reduce((acc, currentTrip) => {
+                let destination = destinationRepository.getDestinationById(currentTrip.destinationID)
+                acc += ((currentTrip.duration * destination.estimatedLodgingCostPerDay) + (currentTrip.travelers * destination.estimatedFlightCostPerPerson));
+                return acc;
+            }, 0)
+            return (totalCost * 1.1).toFixed(0);
+        }
+        return 0
     }
 }
 

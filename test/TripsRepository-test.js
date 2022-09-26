@@ -44,7 +44,7 @@ describe('Trips', () => {
   });
 
   it('should calculate and return total cost of trips annually', () => {
-    expect(trips.totalCostAnnualTrip(tripsSampleData, destinations)).to.equal('10401')
+    expect(trips.totalCostAnnualTrip(tripsSampleData, destinations, 1)).to.equal('6611')
 
   });
 
@@ -58,14 +58,9 @@ describe('Trips', () => {
 
   });
 
-  it.skip('should be able to return a traveler\'s trip status', () => {
-    expect(trips.getAllPendingTrips()).to.equal('pending');
-    expect(trips.getAllPendingTrips()).to.equal('approved');
-  })
-
-  it.skip('should be able to return a traveler\'s current trips', () => {
-    expect(trips.getAllCurrentTrips(1, 'current')).to.deep.equal([tripsSampleData[2], tripsSampleData[0]]);
-
+  it('should be able to return a traveler\'s trip status as pending', () => {
+    expect(trips.getAllPendingTrips(2)).to.deep.equal([tripsSampleData[4]])
+    expect(trips.getAllPendingTrips(1)).to.deep.equal([]);
   });
 
 });
