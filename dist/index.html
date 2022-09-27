@@ -34,14 +34,14 @@
       <h2 class="plan-header card-header">Please Enter Your Info👇</h2>
       <form class="plan-trip-form">
         <label class="main-form" for="destination-datalist">destinations</label>
-        <input placeholder="select from menu or type" class="main-form user-input" type="text" list="destinations" id="destination-datalist" name="destination-datalist" required>
+        <input aria-label="select your destination" placeholder="select from menu or type" class="main-form user-input" type="text" list="destinations" id="destination-datalist" name="destination-datalist" required>
         <datalist id="destinations"></datalist> 
         <label class="main-form" for="duration-trip-info">duration of trip (days)</label>
-        <input placeholder="min 1 day" class="main-form user-input" id="duration-trip-info" name="duration-trip-info" type="number" step="1" min="1" required>
+        <input aria-label="select number of days" placeholder="min 1 day" class="main-form user-input" id="duration-trip-info" name="duration-trip-info" type="number" step="1" min="1" required>
         <label class="main-form" for="number-travelers-info">number of travelers?</label>
-        <input placeholder="min 1 person" class="main-form user-input" id="number-travelers-info" id="number-travelers-info" name="number-travelers-info" type="number" step="1" min="1" required>
+        <input aria-label="select number of persons" placeholder="min 1 person" class="main-form user-input" id="number-travelers-info" id="number-travelers-info" name="number-travelers-info" type="number" step="1" min="1" required>
         <label class="main-form" for="departure-info">departure date</label>
-        <input type="date" data-date-inline-picker="true" id="travelFormDate" min="" required>
+        <input aria-label="select a start date for trip" type="date" data-date-inline-picker="true" id="travelFormDate" min="" required>
         <input type="submit" class="main-form" id="submitCostButton" value="submit">
       </form>
       <div class="trip-cost">

@@ -44,6 +44,9 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
     console.log('random traveler: ', randomTraveler)
     populateLocationsDropdown();
     displayTravelerInfo();
+    displayFuture()
+    displayPast()
+    displayTotalCostAnnualTrip()
   });
   
   // POST API DATA //
@@ -117,11 +120,11 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
 
   function onLoginSuccess() {
     console.log('login was success');
-    hide(loginForm)
-    show(mainSection)
-    displayFuture()
-    displayPast()
-    displayTotalCostAnnualTrip()
+    // hide(loginForm)
+    // show(mainSection)
+    // displayFuture()
+    // displayPast()
+    // displayTotalCostAnnualTrip()
     //displayPast()
     
     submitTripButton = document.getElementById('submitTripButton');
@@ -147,32 +150,32 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
   // USER LOGIN //
   // ---------------------------------------------------
 
-  function loginTraveler(event) {
-    event.preventDefault()
-    let userName = usernameInput.value;
-    if (userName.length < 8) {
-      return;
-    }
-    let userPassword = passwordInput.value;
-    let userId = userName.substr(8, userName.length);
-    let parsedId = parseInt(userId);
-    if (isNaN(parsedId)) {
-      console.log('username is invalid type!');
-      return;
-    }
-    if (userPassword !== 'travel') {
-      console.log('Invalid password entry!');
-      return;
-    }
-    console.log('password correct!');
-    let travelerData = travelersRepo.getTravelerInfoById(parsedId);
-    if (travelerData === undefined) {
-      console.log('traveler ID is invalid');
-      return;
-    }
-    loggedInTraveler = new Traveler(travelerData);
-    onLoginSuccess();
-  };
+  // function loginTraveler(event) {
+  //   event.preventDefault()
+  //   let userName = usernameInput.value;
+  //   if (userName.length < 8) {
+  //     return;
+  //   }
+  //   let userPassword = passwordInput.value;
+  //   let userId = userName.substr(8, userName.length);
+  //   let parsedId = parseInt(userId);
+  //   if (isNaN(parsedId)) {
+  //     console.log('username is invalid type!');
+  //     return;
+  //   }
+  //   if (userPassword !== 'travel') {
+  //     console.log('Invalid password entry!');
+  //     return;
+  //   }
+  //   console.log('password correct!');
+  //   let travelerData = travelersRepo.getTravelerInfoById(parsedId);
+  //   if (travelerData === undefined) {
+  //     console.log('traveler ID is invalid');
+  //     return;
+  //   }
+  //   loggedInTraveler = new Traveler(travelerData);
+  //   onLoginSuccess();
+  // };
 
   function clearTripForm() {
     //assign to an empty string
@@ -215,7 +218,7 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
 
   function displayTotalCostAnnualTrip() {
     let tripsYear = (new Date()).getFullYear().toString();
-    let totalCost = tripsRepo.getTripsById(loggedInTraveler.id).reduce((acc, currentTrip) => {
+    let totalCost = tripsRepo.getTripsById(randomTraveler.id).reduce((acc, currentTrip) => {
       allDestinations.forEach(destination => {
         if((currentTrip.destinationID === destination.id) && (currentTrip.date.split("/")[0]) === tripsYear) {
         acc += ((currentTrip.duration * destination.estimatedLodgingCostPerDay) +
@@ -228,7 +231,7 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
   };
 
 function displayFuture() {
-  let ID = loggedInTraveler.id
+  let ID = randomTraveler.id
   tripsRepo.getAllFutureTrips(ID).filter(currentTrip => {
     allDestinations.forEach(destination => {
       if (currentTrip.destinationID === destination.id) {
@@ -239,7 +242,7 @@ function displayFuture() {
 }
 
 function displayPast() {
-  let ID = loggedInTraveler.id
+  let ID = randomTraveler.id
   tripsRepo.getAllPastTrips(ID).filter(currentTrip => {
     allDestinations.forEach(destination => {
       if (currentTrip.destinationID === destination.id) {
@@ -251,7 +254,7 @@ function displayPast() {
 
 function createTripCard(destination) {
   return `<div>
-      <img src="${destination.image}" style=height: 500px; width= 500px"/>
+      <img src="${destination.image}" height="250px" width="500px" alt="${destination.alt}"/>
       <p>${destination.destination}</p> 
     </div>`
 }
@@ -259,7 +262,7 @@ function createTripCard(destination) {
 function displayPendingTrip(trip) {
   let destination = destinationsRepo.getDestinationById(trip.destinationID)
   pendingTrips.innerHTML += `<div>
-  <img src="${destination.image}" style=height: 500px; width= 500px"/>
+  <img src="${destination.image}" height="250px" width="500px" alt="${destination.alt}"/>
   <p>${destination.destination}</p> 
   <p>${trip.duration} days</p> 
   <p>${trip.travelers} person(s)</p> 
