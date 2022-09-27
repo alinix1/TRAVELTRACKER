@@ -24,9 +24,9 @@ main {
   align-items: center;
 }
 
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 
 form,
 .plan-trip-card,
@@ -216,4 +216,3 @@ form,
   width: 50vw;
   height: 50vh;
 }
-

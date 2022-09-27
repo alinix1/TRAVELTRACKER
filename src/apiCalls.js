@@ -2,23 +2,23 @@ let fetchData = (data) => {
     return fetch(data)
     .then(response => response.json())
     .catch(error => console.log(error))
-};
+}
 
 let postData = (url, options) => {
     return fetch(url, options)
     .then(response => response.json())
     .catch(error => console.log(error))
-};
+}
 
 const apiCalls = {
     getTravelersData: () => {
-        return fetchData('http://localhost:3001/api/v1/travelers');
+        return fetchData('http://localhost:3001/api/v1/travelers')
     }, 
     getTripsData: () => {
-        return fetchData('http://localhost:3001/api/v1/trips');
+        return fetchData('http://localhost:3001/api/v1/trips')
     },
     getDestinationsData: () => {
-        return fetchData('http://localhost:3001/api/v1/destinations');
+        return fetchData('http://localhost:3001/api/v1/destinations')
     },
 
     postTravelersData: (data) => {
@@ -29,8 +29,8 @@ const apiCalls = {
               'Content-Type': 'application/json'
             }
           }
-        return postData('http://localhost:3001/api/v1/trips', options);
+        return postData('http://localhost:3001/api/v1/trips', options)
     }
-};
+}
   
 export { apiCalls }
