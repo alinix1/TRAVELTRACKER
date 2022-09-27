@@ -20,7 +20,8 @@ let allTrips;
 let destinationsRepo;
 let tripsRepo;
 let travelersRepo;
-let traveler;
+let randomTraveler;
+let loggedInTraveler;
 
 // FETCH PROMISES //
 // ---------------------------------------------------
@@ -39,41 +40,53 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
     destinationsRepo = new DestinationsRepository(allDestinations);
     tripsRepo = new TripsRepository(allTrips);
     travelersRepo = new TravelerRepository(allTravelers);
-    traveler = new Traveler(allTravelers[Math.floor(Math.random() * allTravelers.length)]);
-    console.log('a traveler: ', traveler)
+    randomTraveler = new Traveler(allTravelers[Math.floor(Math.random() * allTravelers.length)]);
+    console.log('random traveler: ', randomTraveler)
     populateLocationsDropdown();
-    onLoginSuccess();
-    displayTotalCostAnnualTrip();
-    displayFuture();
-    displayPast();
+    displayTravelerInfo();
   });
   
   // POST API DATA //
   // ---------------------------------------------------
 
-  function postNewTrip() {
+  function postNewTrip(event) {
+    console.log('my trip yall')
+    event.preventDefault()
     let destinationValue = destinationDataList.value;
     let travelersValue =  numberTravelersInfo.value;
     let durationValue = durationTripInfo.value;
     let travelValue =  travelFormDate.value;
     let newDateValue = travelValue.split('-').join('/')
-    console.log('travel value', newDateValue)
+    console.log('travel date', newDateValue)
     let destinationObj = allDestinations.find(destinationObj => destinationValue === destinationObj.destination)
     console.log(destinationObj)
-    let data = {id: Date.now(), userID: traveler.id , destinationID: destinationObj.id, travelers: travelersValue, date: newDateValue, duration: durationValue, status: 'pending', suggestedActivities: []}
+    let data = {
+      id: Date.now(),
+      userID: loggedInTraveler.id,
+      destinationID: destinationObj.id,
+      travelers: travelersValue,
+      date: newDateValue,
+      duration: durationValue,
+      status: 'pending',
+      suggestedActivities: []
+    }
     let result = apiCalls.postTravelersData(data)
-    console.log('RESULT API', result)
+      .then((data) => {
+        console.log('Posted trip: ', data)
+        displayPendingTrip(data.newTrip)
+      })
+      clearTripForm();
   
-  }
+  };
 
   // QUERY SELECTORS //
 // ---------------------------------------------------
 
 var travelerName = document.getElementById('travelerName');
-var loginForm = document.querySelector('.login-form');
+var loginForm = document.getElementById('login-form');//document.querySelector('.login-form');
 var pastTrips = document.querySelector('.past-trips');
 var futureTrips = document.querySelector('.upcoming-trips');
-var presentTrips = document.querySelector('.present-trips');
+var pendingTrips = document.querySelector('.pending-trips');
 var planTripForm = document.querySelector('.plan-trip-form');
 var mainSection = document.querySelector('main');
 var totalCostYear = document.querySelector('.total-cost-year');
@@ -88,44 +101,53 @@ var usernameInput = document.getElementById('username-input');
 var passwordInput = document.getElementById('password-input');
 var loginBtn = document.getElementById('loginButton');
 var refreshBtn = document.querySelector('.refresh-button');
-var submitTripButton = document.getElementById('submitTripButton');
+var submitTripButton = document.querySelector('button.submit-trip-btn');
 
   // EVENT LISTENERS //
   // ---------------------------------------------------
 
   submitCostButton.addEventListener('click', displayTripDetails);
   loginBtn.addEventListener('click', loginTraveler);
-  refreshBtn.addEventListener('click', refreshingButton);
+  // refreshBtn.addEventListener('click', refreshingButton);
   submitTripButton.addEventListener('click', postNewTrip);
-  // loginForm.classList.replace('hidden', '');
+  
 
   // FUNCTIONS //
   // ---------------------------------------------------
 
   function onLoginSuccess() {
-    displayTravelerInfo();
+    console.log('login was success');
+    hide(loginForm)
+    show(mainSection)
+    displayFuture()
+    displayTotalCostAnnualTrip()
+    //displayPast()
+    
+    submitTripButton = document.getElementById('submitTripButton');
+
     // hide(loginForm);
     // formatPastTrips();
     // showTravelerTrips(time);
   };
-  function refreshingButton() {
-    location.reload();
-  };
+  // function refreshingButton() {
+  //   location.reload();
+  // };
   // HIDE AND SHOW FUNCTIONS //
 
-  // function show(e) {
-  //   e.classList.remove('hidden')
-  // }
-  // function hide(e) {
-  //   e.classList.add('hidden')
-  // }
+  function show(e) {
+    e.classList.remove('hidden')
+  };
+  function hide(e) {
+    e.classList.add('hidden')
+  };
   // mainSection.classList.remove('hidden');
   // loginForm.classList.add('hidden');
 
   // USER LOGIN //
   // ---------------------------------------------------
 
-  function loginTraveler() {
+  function loginTraveler(event) {
+    event.preventDefault()
     let userName = usernameInput.value;
     if (userName.length < 8) {
       return;
@@ -142,17 +164,17 @@ var submitTripButton = document.getElementById('submitTripButton');
       return;
     }
     console.log('password correct!');
-    traveler = travelersRepo.getTravelerInfoById(parsedId);
-    if (traveler === undefined) {
+    let travelerData = travelersRepo.getTravelerInfoById(parsedId);
+    if (travelerData === undefined) {
       console.log('traveler ID is invalid');
       return;
     }
+    loggedInTraveler = new Traveler(travelerData);
     onLoginSuccess();
   };
 
-  // CLEAR FORM // 
-
-  function clearForm() {
+  function clearTripForm() {
+    //assign to an empty string
     //need a way to clear the form after input 
   }
 
@@ -162,8 +184,9 @@ var submitTripButton = document.getElementById('submitTripButton');
   // ---------------------------------------------------
 
   function displayTravelerInfo() {
-    travelerName.innerHTML = `Welcome, ${traveler.returnFirstName()}`;
+    travelerName.innerHTML = `Welcome, ${randomTraveler.returnFirstName()}`;
   };
+
   function populateLocationsDropdown() {
     destinationsRepo.getAllDestinations().forEach(destination => {
       var option = document.createElement('option');
@@ -172,7 +195,9 @@ var submitTripButton = document.getElementById('submitTripButton');
       dataList.appendChild(option);
     });
   };
-  function displayTripDetails() {
+
+  function displayTripDetails(event) {
+    event.preventDefault()
     let selectedDestination = destinationDataList.value;
     let selectedTripDuration = durationTripInfo.value;
     let selectedNumTravelers = numberTravelersInfo.value;
@@ -186,9 +211,10 @@ var submitTripButton = document.getElementById('submitTripButton');
    let estimatedCost = tripsRepo.totalCostSingleTrip(trip, destination);
    totalCostTravelerTrip.innerText = '$' + estimatedCost;
   };
+
   function displayTotalCostAnnualTrip() {
     let tripsYear = (new Date()).getFullYear().toString();
-    let totalCost = tripsRepo.getTripsById(traveler.id).reduce((acc, currentTrip) => {
+    let totalCost = tripsRepo.getTripsById(loggedInTraveler.id).reduce((acc, currentTrip) => {
       allDestinations.forEach(destination => {
         if((currentTrip.destinationID === destination.id) && (currentTrip.date.split("/")[0]) === tripsYear) {
         acc += ((currentTrip.duration * destination.estimatedLodgingCostPerDay) +
@@ -199,27 +225,47 @@ var submitTripButton = document.getElementById('submitTripButton');
     }, 0)
     return totalCostYear.innerHTML = `<h3>$${totalCost.toFixed(2)} spent this year* (not including upcoming trips)</h3>`;
   };
+
 function displayFuture() {
-  let ID = traveler.id
+  let ID = loggedInTraveler.id
   tripsRepo.getAllFutureTrips(ID).filter(currentTrip => {
     allDestinations.forEach(destination => {
       if (currentTrip.destinationID === destination.id) {
-        futureTrips.innerHTML += `<img src="${destination.image}" style=height: 500px; width= 500px"/>`
+        futureTrips.innerHTML += createTripCard(destination)
       }
   })
 })
 }
+
 function displayPast() {
-  let ID = traveler.id
+  let ID = loggedInTraveler.id
   tripsRepo.getAllPastTrips(ID).filter(currentTrip => {
     allDestinations.forEach(destination => {
       if (currentTrip.destinationID === destination.id) {
-        pastTrips.innerHTML += `<img src="${destination.image}" style=height: 500px; width= 500px"/>`
+        pastTrips.innerHTML += createTripCard(destination)
       }
     })
   })
 }
 
+function createTripCard(destination) {
+  return `<div>
+      <img src="${destination.image}" style=height: 500px; width= 500px"/>
+      <p>${destination.destination}</p> 
+    </div>`
+}
+
+function displayPendingTrip(trip) {
+  let destination = destinationsRepo.getDestinationById(trip.destinationID)
+  pendingTrips.innerHTML += `<div>
+  <img src="${destination.image}" style=height: 500px; width= 500px"/>
+  <p>${destination.destination}</p> 
+  <p>${trip.duration} days</p> 
+  <p>${trip.travelers} person(s)</p> 
+  <p>${trip.date}</p>
+  <p>${trip.status}</p>
+</div>`
+}
 
 
 
