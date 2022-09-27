@@ -18,11 +18,13 @@
 
   ![Screen Shot 2022-09-27 at 12 18 23 PM](https://user-images.githubusercontent.com/28677929/192606871-a42855c4-2375-4696-94b4-dc6cac885607.png)
 
-  ![2022-09-27 12 22 06](https://user-images.githubusercontent.com/28677929/192606963-d3599ec7-b725-4548-acdf-208a958e799c.gif)
+  ![2022-09-27 12 22 06](https://user-images.githubusercontent.com/28677929/192610748-87cadf7e-f1ca-4cb4-89a8-d29785906991.gif)
 
   ![Screen Shot 2022-09-27 at 12 33 02 PM](https://user-images.githubusercontent.com/28677929/192608128-d3b04a5f-d5c2-40b9-81e1-e731cb8b17ec.png)
 
-  ![2022-09-27 12 32 02](https://user-images.githubusercontent.com/28677929/192608331-2f84bf90-4898-40b2-9b90-688168fee771.gif)
+  ![2022-09-27 12 32 02](https://user-images.githubusercontent.com/28677929/192611017-39371838-ce4c-4a3a-8e22-b3f47be4f4f5.gif)
+
+  
 
   ## Technologies 
   - JavaScript
