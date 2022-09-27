@@ -3,10 +3,8 @@ import TripsRepository from '../src/classes/TripsRepository.js';
 import DestinationsRepository from '../src/classes/DestinationsRepository.js';
 import tripsSampleData from '../src/sample-data/tripsSampleData.js';
 import destinationsSampleData from '../src/sample-data/destinationsSampleData.js';
-
 describe('Trips', () => {
   let trips, destinations;
-  
   beforeEach(() => {
       trips = new TripsRepository(tripsSampleData);
       destinations = new DestinationsRepository(destinationsSampleData);
@@ -31,7 +29,7 @@ describe('Trips', () => {
     expect(trips.getTripsById(3)).to.deep.equal([tripsSampleData[6], tripsSampleData[7], tripsSampleData[8]]);
 
   });
-  
+
   it('should return an empty array if userID is not valid', () => {
     expect(trips.getTripsById(1000000000)).to.deep.equal([]);
 
@@ -49,19 +47,20 @@ describe('Trips', () => {
   });
 
   it('should be able to return a traveler\'s past trips', () => {
-    expect(trips.getAllPastTrips(2, 'past')).to.deep.equal([tripsSampleData[3], tripsSampleData[4], tripsSampleData[5]]);
-    
+    expect(trips.getAllPastTrips(2)).to.deep.equal([tripsSampleData[3], tripsSampleData[4], tripsSampleData[5]]);
+
   });
 
   it('should be able to return a traveler\'s future trips', () => {
-    expect(trips.getAllFutureTrips(3, 'future')).to.deep.equal([tripsSampleData[6], tripsSampleData[7], tripsSampleData[8]]);
+    expect(trips.getAllFutureTrips(3)).to.deep.equal([tripsSampleData[6], tripsSampleData[7], tripsSampleData[8]]);
 
   });
 
   it('should be able to return a traveler\'s trip status as pending', () => {
     expect(trips.getAllPendingTrips(2)).to.deep.equal([tripsSampleData[4]])
     expect(trips.getAllPendingTrips(1)).to.deep.equal([]);
-  });
 
+  });
+  
 });
 
