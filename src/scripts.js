@@ -39,6 +39,9 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
     randomTraveler = new Traveler(allTravelers[Math.floor(Math.random() * allTravelers.length)]);
     populateLocationsDropdown();
     displayTravelerInfo();
+    displayFuture()
+    displayPast()
+    displayTotalCostAnnualTrip()
   });
   
   // POST API DATA //
@@ -108,6 +111,7 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
     displayFuture();
     displayPast();
     displayTotalCostAnnualTrip();
+
     
     submitTripButton = document.getElementById('submitTripButton');
 
@@ -125,6 +129,7 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
 
   // USER LOGIN //
   // ---------------------------------------------------
+
 
   function loginTraveler(event) {
     event.preventDefault();
@@ -152,6 +157,7 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
     loggedInTraveler = new Traveler(travelerData);
     onLoginSuccess();
   };
+
 
   // DOM MANIPULATION //
   // ---------------------------------------------------
@@ -187,7 +193,7 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
 
   function displayTotalCostAnnualTrip() {
     let tripsYear = (new Date()).getFullYear().toString();
-    let totalCost = tripsRepo.getTripsById(loggedInTraveler.id).reduce((acc, currentTrip) => {
+    let totalCost = tripsRepo.getTripsById(randomTraveler.id).reduce((acc, currentTrip) => {
       allDestinations.forEach(destination => {
         if((currentTrip.destinationID === destination.id) && (currentTrip.date.split("/")[0]) === tripsYear) {
         acc += ((currentTrip.duration * destination.estimatedLodgingCostPerDay) +
@@ -223,7 +229,7 @@ function displayPast() {
 
 function createTripCard(destination) {
   return `<div>
-      <img src="${destination.image}" style=height: 500px; width= 500px"/>
+      <img src="${destination.image}" height="250px" width="500px" alt="${destination.alt}"/>
       <p>${destination.destination}</p> 
     </div>`
 };
