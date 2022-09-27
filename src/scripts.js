@@ -120,6 +120,7 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
     hide(loginForm)
     show(mainSection)
     displayFuture()
+    displayPast()
     displayTotalCostAnnualTrip()
     //displayPast()
     
@@ -178,7 +179,7 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
     //need a way to clear the form after input 
   }
 
-// DRY UP FUNCTION???? //
+
 
   // DOM MANIPULATION //
   // ---------------------------------------------------
@@ -266,8 +267,3 @@ function displayPendingTrip(trip) {
   <p>${trip.status}</p>
 </div>`
 }
-
-
-
-
-
