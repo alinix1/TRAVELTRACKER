@@ -9,8 +9,8 @@ class DestinationsRepository {
         return this.destinations;
     }
     getDestinationByName(name) {
-        return this.destinations.find(destination => destination.destination === name)
+        return this.destinations.find(destination => destination.destination === name);
     }
-}
+};
 
 export default DestinationsRepository;
