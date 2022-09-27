@@ -11,6 +11,6 @@ class DestinationsRepository {
     getDestinationByName(name) {
         return this.destinations.find(destination => destination.destination === name);
     }
-};
+}
 
 export default DestinationsRepository;
