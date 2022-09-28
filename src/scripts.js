@@ -23,6 +23,9 @@ let travelersRepo;
 let randomTraveler;
 let loggedInTraveler;
 
+//TODO:  do I need a global variable for randomTraveler?
+// want to greet the loggedInTraveler once they login not a random traveler
+
 // FETCH PROMISES //
 // ---------------------------------------------------
 
@@ -32,16 +35,12 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
       return acc = {...acc, ...currentItem}
     }, {})
     allDestinations = allTravelersData.destinations;
-    console.log('all destinations: ', allDestinations);
     allTravelers = allTravelersData.travelers;
-    console.log('all travelers: ', allTravelers);
     allTrips = allTravelersData.trips;
-    console.log('all trips: ', allTrips)
     destinationsRepo = new DestinationsRepository(allDestinations);
     tripsRepo = new TripsRepository(allTrips);
     travelersRepo = new TravelerRepository(allTravelers);
     randomTraveler = new Traveler(allTravelers[Math.floor(Math.random() * allTravelers.length)]);
-    console.log('random traveler: ', randomTraveler)
     populateLocationsDropdown();
     displayTravelerInfo();
   });
@@ -50,16 +49,13 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
   // ---------------------------------------------------
 
   function postNewTrip(event) {
-    console.log('my trip yall')
     event.preventDefault()
     let destinationValue = destinationDataList.value;
     let travelersValue =  numberTravelersInfo.value;
     let durationValue = durationTripInfo.value;
     let travelValue =  travelFormDate.value;
     let newDateValue = travelValue.split('-').join('/')
-    console.log('travel date', newDateValue)
     let destinationObj = allDestinations.find(destinationObj => destinationValue === destinationObj.destination)
-    console.log(destinationObj)
     let data = {
       id: Date.now(),
       userID: loggedInTraveler.id,
@@ -72,18 +68,35 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
     }
     let result = apiCalls.postTravelersData(data)
       .then((data) => {
-        console.log('Posted trip: ', data)
         displayPendingTrip(data.newTrip)
       })
       clearTripForm();
-  
   };
+
+  //TODO:  should include a response.ok
+
+//export const deleteFavorite = (id, bookId) => {
+//   const options = {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   }
+//   return fetch(`http://localhost:3001/api/v1/users/${id}/bookfavorites/${bookId}`, options)
+//     .then(() => fetch(`http://localhost:3001/api/v1/users/${id}/bookfavorites/`))
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error('Could not delete favorite.')
+//       }
+//       return response.json()
+//     })
+// }
 
   // QUERY SELECTORS //
 // ---------------------------------------------------
 
 var travelerName = document.getElementById('travelerName');
-var loginForm = document.getElementById('login-form');//document.querySelector('.login-form');
+var loginForm = document.getElementById('login-form');
 var pastTrips = document.querySelector('.past-trips');
 var futureTrips = document.querySelector('.upcoming-trips');
 var pendingTrips = document.querySelector('.pending-trips');
@@ -100,7 +113,6 @@ var dataList = document.getElementById('destinations');
 var usernameInput = document.getElementById('username-input');
 var passwordInput = document.getElementById('password-input');
 var loginBtn = document.getElementById('loginButton');
-var refreshBtn = document.querySelector('.refresh-button');
 var submitTripButton = document.querySelector('button.submit-trip-btn');
 
   // EVENT LISTENERS //
@@ -108,7 +120,6 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
 
   submitCostButton.addEventListener('click', displayTripDetails);
   loginBtn.addEventListener('click', loginTraveler);
-  // refreshBtn.addEventListener('click', refreshingButton);
   submitTripButton.addEventListener('click', postNewTrip);
   
   // FUNCTIONS //
@@ -145,22 +156,22 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
     let userId = userName.substr(8, userName.length);
     let parsedId = parseInt(userId);
     if (isNaN(parsedId)) {
-      console.log('username is invalid type!');
-      return;
+      alert('username is invalid type!');
     }
     if (userPassword !== 'travel') {
-      console.log('Invalid password entry!');
-      return;
+      alert('Invalid password entry!');
     }
-    console.log('password correct!');
+    // console.log('password correct!');
     let travelerData = travelersRepo.getTravelerInfoById(parsedId);
     if (travelerData === undefined) {
-      console.log('traveler ID is invalid');
-      return;
+      alert('traveler ID is invalid');
     }
     loggedInTraveler = new Traveler(travelerData);
     onLoginSuccess();
   };
+
+  // TODO: use an alert on login page for invalid username or invalid password entry
+  // validation check for username works but the password does not work - still allows for entry to new page
 
   function clearTripForm() {
   };
@@ -171,6 +182,8 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
   function displayTravelerInfo() {
     travelerName.innerHTML = `Welcome, ${randomTraveler.returnFirstName()}`;
   };
+
+  // TODO: greet loggedInTraveler not randomTraveler
 
   function populateLocationsDropdown() {
     destinationsRepo.getAllDestinations().forEach(destination => {
@@ -233,9 +246,12 @@ function displayPast() {
   })
 };
 
+//TODO: add to the trip card info on the date 
+
 function createTripCard(destination) {
+  // let trip = tripsRepo.getTripsById(trip.userID)
   return `<div>
-      <img src="${destination.image}" style=height: 500px; width= 500px"/>
+      <img src="${destination.image}" height="250px" width="500px" alt="${destination.alt}"/>
       <p>${destination.destination}</p> 
     </div>`
 };
@@ -243,7 +259,7 @@ function createTripCard(destination) {
 function displayPendingTrip(trip) {
   let destination = destinationsRepo.getDestinationById(trip.destinationID)
   pendingTrips.innerHTML += `<div>
-  <img src="${destination.image}" style=height: 500px; width= 500px"/>
+  <img src="${destination.image}" height="250px" width="500px" alt="${destination.alt}"/>
   <p>${destination.destination}</p> 
   <p>${trip.duration} days</p> 
   <p>${trip.travelers} person(s)</p> 
