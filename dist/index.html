@@ -14,7 +14,6 @@
     <p class="caption" id="caption">"Travel is my therapy."
       <br>"Forget champagne and caviar - Taste the world instead!"
     </p>
-    <button class="refresh-button" id="refreshButton">R E F R E S H</button>
     <div class="welcome-traveler">
       <h2 id="welcomeTraveler"></h2>
       <div class="traveler-name" id="travelerName">
@@ -24,9 +23,9 @@
   <img class="airplane-window" src="./images/airplane-window.png" alt="airplane window">
   <form class="login-form" id="login-form">
     <label for="username-input" class="main-form">username:</label>
-    <input type="text" class="username-input login-page-input user-input main-form" name="username-input" placeholder="username" id="username-input" required>
+    <input type="text" class="username-input login-page-input user-input main-form" name="username-input" placeholder="username" id="username-input" minlength="10" required>
     <label for="password-input" class="main-form">password:</label>
-    <input type="password" class="password-input login-page-input user-input main-form" name="password-input" placeholder="password" id="password-input" required>
+    <input type="password" class="password-input login-page-input user-input main-form" name="password-input" placeholder="password" id="password-input" minlength="6" required>
     <input type="submit" class="login-page-input user-input main-form" id="loginButton" value="login">
   </form>
   <main class="hidden">

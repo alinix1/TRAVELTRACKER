@@ -131,11 +131,14 @@ form,
   width: 150%;
 }
 
-.trips-container {
-  overflow-x: hidden;
-  overflow-y: scroll;
+.trips-container,
+.upcoming-trips, 
+.pending-trips,
+.past-trips {
   width: 50vw;
   height: 50vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .trips-info {
@@ -204,15 +207,5 @@ form,
   margin-top: 100px;
 }
 
-.refresh-button {
-  width: 200px;
-  height: 30px;
-  transition-duration: 0.5s;
-  margin-top: 50px;
-  margin-left: 50px;
-}
 
-.pending-trips {
-  width: 50vw;
-  height: 50vh;
-}
+
