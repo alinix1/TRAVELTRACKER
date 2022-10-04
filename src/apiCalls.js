@@ -1,12 +1,18 @@
 let fetchData = (data) => {
     return fetch(data)
+
     .then(response => response.json())
     .catch(error => console.log(error))
 }
 
 let postData = (url, options) => {
     return fetch(url, options)
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Could not retrieve the data')
+        }
+    return response.json() 
+    })
     .catch(error => console.log(error))
 }
 
