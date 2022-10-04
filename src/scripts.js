@@ -73,25 +73,6 @@ Promise.all([apiCalls.getTravelersData(), apiCalls.getTripsData(), apiCalls.getD
       clearTripForm();
   };
 
-  //TODO:  should include a response.ok
-
-//export const deleteFavorite = (id, bookId) => {
-//   const options = {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   }
-//   return fetch(`http://localhost:3001/api/v1/users/${id}/bookfavorites/${bookId}`, options)
-//     .then(() => fetch(`http://localhost:3001/api/v1/users/${id}/bookfavorites/`))
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Could not delete favorite.')
-//       }
-//       return response.json()
-//     })
-// }
-
   // QUERY SELECTORS //
 // ---------------------------------------------------
 
@@ -153,25 +134,22 @@ var submitTripButton = document.querySelector('button.submit-trip-btn');
       return;
     }
     let userPassword = passwordInput.value;
-    let userId = userName.substr(8, userName.length);
-    let parsedId = parseInt(userId);
-    if (isNaN(parsedId)) {
+    let user = allTravelers.find(traveler => `traveler${traveler.id}` === userName)
+    let travelerData;
+    if (user) {
+      travelerData = travelersRepo.getTravelerInfoById(user.id);
+    }
+    if (!user) {
       alert('username is invalid type!');
-    }
-    if (userPassword !== 'travel') {
+    } else if (userPassword !== 'travel') {
       alert('Invalid password entry!');
-    }
-    // console.log('password correct!');
-    let travelerData = travelersRepo.getTravelerInfoById(parsedId);
-    if (travelerData === undefined) {
+    } else if (travelerData === undefined) {
       alert('traveler ID is invalid');
+    } else {
+      loggedInTraveler = new Traveler(travelerData);
+      onLoginSuccess();
     }
-    loggedInTraveler = new Traveler(travelerData);
-    onLoginSuccess();
   };
-
-  // TODO: use an alert on login page for invalid username or invalid password entry
-  // validation check for username works but the password does not work - still allows for entry to new page
 
   function clearTripForm() {
   };
