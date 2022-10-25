@@ -18,13 +18,13 @@ let postData = (url, options) => {
 
 const apiCalls = {
     getTravelersData: () => {
-        return fetchData('http://localhost:3001/api/v1/travelers')
+        return fetchData('https://travel-tracker-api-zeta.vercel.app/api/v1/travelers')
     }, 
     getTripsData: () => {
-        return fetchData('http://localhost:3001/api/v1/trips')
+        return fetchData('https://travel-tracker-api-zeta.vercel.app/api/v1/trips')
     },
     getDestinationsData: () => {
-        return fetchData('http://localhost:3001/api/v1/destinations')
+        return fetchData('https://travel-tracker-api-zeta.vercel.app/api/v1/destinations')
     },
 
     postTravelersData: (data) => {
@@ -35,7 +35,7 @@ const apiCalls = {
               'Content-Type': 'application/json'
             }
           }
-        return postData('http://localhost:3001/api/v1/trips', options)
+        return postData('https://travel-tracker-api-zeta.vercel.app/api/v1/trips', options)
     }
 }
   
