@@ -50,7 +50,7 @@
   - A traveler can create and submit a new trip that will result in 'pending' status 
 
   ## Deployed Page 
-  Visit the published site!   [here](https://alinix1.github.io/TRAVELTRACKER/)
+  Visit the published site!   [here]()
 
  ## Setup
  - Fork the repository
