@@ -50,7 +50,7 @@
   - A traveler can create and submit a new trip that will result in 'pending' status 
 
   ## Deployed Page 
-  Visit the published site!   [here]()
+  Visit the published site!   [here](https://travel-tracker-dezqxuqz3-alinix1.vercel.app/)
 
  ## Setup
  - Fork the repository
