@@ -25,7 +25,7 @@
   ![2022-10-07 18 34 09](https://user-images.githubusercontent.com/28677929/194678571-df2e31ba-54eb-4c2d-b90e-f008db08f5fc.gif)
 
   ## Technologies 
-  <p align="left"
+  <p align="left">
   <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" title="JavaScript" alt="JavaScript"    width="100" height="30">
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" title="HTML" alt="HTML" width="100" height="30">
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" title="CSS" alt="CSS" width="100" height="30">
