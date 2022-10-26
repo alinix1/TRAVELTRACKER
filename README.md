@@ -36,7 +36,7 @@
   </p>
 
   - API fetch/post
-  - Day.js  
+ 
 
   ## Illustrations
   [TRAVEL TRACKER](https://www.figma.com/file/cqN5KuOyjcoLFRwX2oRTaQ/Travel-Tracker?node-id=0%3A1)
